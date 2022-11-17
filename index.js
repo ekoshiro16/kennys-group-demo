@@ -3,6 +3,7 @@
 const express = require('express'); 
 const morgan = require('morgan'); 
 const { fetchAllRecipes } = require('./db/recipes'); 
+const activityRouter = require('./api/activities');
 
 // Step 2) Create a new Express server instance
 const server = express(); 
@@ -29,17 +30,16 @@ async function consoleLogger(req, res, next) {
 
 server.use(consoleLogger); 
 
+server.use("/api/activities", activityRouter);
+
 // Step 4) Once you finish your middleware, now you can write some real route handlers 
 
 server.get("/recipes", async (req, res, next) => {
     try {
         const recipeData = await fetchAllRecipes(); 
-        const recipeObj = {
-            
-        }
         // const convertedData = await recipeData.json(); 
         // Almost all request handlers will use res.send 
-        res.send(recipeObj).status(203)
+        res.send(recipeData)
     } catch (error) {
         console.log(error); 
     }
