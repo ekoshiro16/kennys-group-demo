@@ -19,3 +19,5 @@ activityRouter.get("/",async  (req, res, next) => {
 
 // Last steP: Make sure you export your subrouter
 module.exports = activityRouter;
+
+// Refer to the root index.js file to see how I created the activities subrouter
